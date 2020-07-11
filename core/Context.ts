@@ -9,6 +9,7 @@ import { FunctionLine } from "./FunctionLine";
 
 export class Context {
   public callStack: Array<FunctionLine> = [];
+  public jumpFlag: String = "";
 
   constructor(private ctx: any) {}
 
@@ -20,10 +21,17 @@ export class Context {
     let current = this.ctx;
     for (let i = 0; i < tokens.length - 1; i++) {
       let token = tokens[i];
+      if (Object.keys(current).includes(token)) {
+        if (current[token]["children"] == undefined) {
+          current[token]["children"] = {};
+        }
+        current = current[token]["children"];
+        continue;
+      }
       current[token] = {
         value:
           current[token] == undefined ? undefined : current[token]["value"],
-        children: {},
+        children: current["children"] == undefined ? {} : current["children"],
       };
       current = current[token]["children"];
     }
@@ -57,6 +65,10 @@ export class Context {
     let current = this.ctx;
     for (let i = 0; i < tokens.length - 1; i++) {
       let token = tokens[i];
+      // if (Object.keys(current).includes(token)) {
+      //   current = current[token]["children"];
+      //   continue;
+      // }
       if (current[token] == undefined) {
         throw new Error("Variable $" + variableName + " does not exist");
       }

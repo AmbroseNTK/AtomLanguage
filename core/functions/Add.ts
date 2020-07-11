@@ -18,15 +18,15 @@ export class AddFunction extends Function {
     let fromVariable = this.fromVariable;
     let result: any;
     if (this.fromVariable.nameOnly) {
-      fromVariable = context.getVariable(this.fromVariable.name);
+      //fromVariable = context.getVariable(this.fromVariable.name);
       result =
         context.getVariableValue(toVariable.name) +
         context.getVariableValue(fromVariable.name);
+    } else {
+      result =
+        context.getVariableValue(this.toVariable.name) +
+        VariableFactory.getValueFromVariable(fromVariable);
     }
-
-    result =
-      context.getVariableValue(toVariable.name) +
-      VariableFactory.getValueFromVariable(fromVariable);
     if (toVariable instanceof Num && fromVariable instanceof Num) {
       context.createVariable(toVariable.name, new Num("", result));
       return;

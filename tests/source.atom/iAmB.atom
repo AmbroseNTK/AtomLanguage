@@ -1,0 +1,15 @@
+Tag "Sub"
+Set 0 to $result
+Add $Sum.params.num1 to $result
+Mul -1 to $Sum.params.num2
+Add $Sum.params.num2 to $result
+Return
+
+Tag "Pow"
+Set 1 to $Pow.result
+Set 0 to $Pow.loop.index
+Tag "PowLoop"
+Mul $Pow.params.base to $Pow.result
+Add 1 to $Pow.loop.index
+Jump "PowLoop" if $Pow.loop.index < $Pow.params.pow
+Return

@@ -6,7 +6,7 @@ import { VariableFactory } from "../VariableFactory";
 
 export class TagFunction extends Function {
   public getPatterns(): RegExp[] {
-    return [/[\n\s]*Tag[\n\s]*\"(.*)\"/];
+    return [/[\n\s]*Tag[\n\s]*(.*)/];
   }
   public parse(source: string): TagFunction {
     let tokens = source.match(this.getPatterns()[0]);
@@ -21,7 +21,10 @@ export class TagFunction extends Function {
   }
   public execute(context: Context): void {}
 
-  constructor(public label: Str) {
+  constructor(public label: Str | null) {
     super("Tag");
+  }
+  public static get instance() {
+    return new TagFunction(null);
   }
 }

@@ -22,7 +22,7 @@ export class MulFunction extends Function {
       throw new Error("Multiply apply for numbers only");
     }
     result =
-      context.getVariableValue(toVariable.name) *
+      context.getVariableValue(this.toVariable.name) *
       VariableFactory.getValueFromVariable(fromVariable);
     context.createVariable(toVariable.name, new Num("", result));
   }

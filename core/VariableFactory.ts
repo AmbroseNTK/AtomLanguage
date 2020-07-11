@@ -6,7 +6,7 @@ import { Num } from "./primities/Num";
 import { Any } from "./primities/Any";
 
 export class VariableFactory {
-  private static variablePattern = /\$([a-zA-Z0-9.]*)/;
+  private static variablePattern = /\$([a-zA-Z0-9._]*)/;
   private static stringPattern = /\"(.*)\"/;
   private static numberPattern = /\-{0,1}[0-9]+\.{0,1}[0-9]*/;
 
@@ -21,7 +21,11 @@ export class VariableFactory {
     if (source == "false") {
       return new Boolean("", false);
     }
-    let tokens = source.match(this.stringPattern);
+    let tokens = source.match(this.variablePattern);
+    if (tokens != null) {
+      return new Variable(tokens[1]);
+    }
+    tokens = source.match(this.stringPattern);
     if (tokens != null) {
       return new Str("", tokens[1]);
     }
@@ -29,10 +33,7 @@ export class VariableFactory {
     if (tokens != null) {
       return new Num("", parseFloat(tokens[0]));
     }
-    tokens = source.match(this.variablePattern);
-    if (tokens != null) {
-      return new Variable(tokens[1]);
-    }
+
     throw new Error(source + " is not valid value");
   }
   public static getValueFromVariable(variable: Variable): any {

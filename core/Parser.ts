@@ -12,6 +12,8 @@ import { FunctionLine } from "./FunctionLine";
 import { FunctionNotMatchError } from "./FunctionNotMatchError";
 import { ParseError } from "./ParseError";
 import { ImportFunction } from "./functions/Import";
+import { JumpFunction } from "./functions/Jump";
+import { TagFunction } from "./functions/Tag";
 
 export class Parser {
   public static parsers = [
@@ -26,8 +28,14 @@ export class Parser {
     ArrayCreateFunction.instance,
     ArrayPushFunction.instance,
     ArrayPopFunction.instance,
+    JumpFunction.instance,
+    TagFunction.instance,
   ];
-  public static parse(fileName: string, source: string): Array<FunctionLine> {
+  public static parse(
+    fileName: string,
+    alias: string,
+    source: string
+  ): Array<FunctionLine> {
     let result = new Array<FunctionLine>();
     let lines = source.trim().split(/\r?\n/);
     let matched = false;
@@ -36,7 +44,7 @@ export class Parser {
       for (let parser of this.parsers) {
         try {
           let fn = parser.parse(lines[i].trim());
-          result.push(new FunctionLine(fileName, i + 1, fn));
+          result.push(new FunctionLine(fileName, i + 1, fn, alias));
           matched = true;
           break;
         } catch (e) {
@@ -45,6 +53,9 @@ export class Parser {
           }
           throw new ParseError(e, fileName, i + 1);
         }
+      }
+      if (lines[i].trim() == "") {
+        continue;
       }
       if (!matched) {
         throw new ParseError(

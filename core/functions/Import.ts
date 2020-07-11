@@ -6,7 +6,7 @@ import { VariableFactory } from "../VariableFactory";
 
 export class ImportFunction extends Function {
   public getPatterns(): RegExp[] {
-    return [/[\n\s]*Import[\n\s]*\"(.*)\"[\n\s]*as[\n\s]*\"(.*)\"/];
+    return [/[\n\s]*Import[\n\s]*(.*)[\n\s]*as[\n\s]*(.*)/];
   }
   public parse(source: string): ImportFunction {
     let tokens = source.trim().match(this.getPatterns()[0]);

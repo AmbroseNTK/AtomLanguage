@@ -4,6 +4,7 @@ export class FunctionLine {
   constructor(
     public fileName: string,
     public line: number,
-    public fn: Function
+    public fn: Function,
+    public alias: string
   ) {}
 }

@@ -1,0 +1,23 @@
+Import "iAmB.atom" as "B"
+
+Tag "Sum"
+Set 0 to $result
+Add $Sum.params.num1 to $result
+Add $Sum.params.num2 to $result
+Return
+
+Begin
+Set 2 to $Sum.params.num1
+Set 3 to $Sum.params.num2
+Set 0 to $Sum.result
+Jump "Sum"
+Set $result to $Sum.result
+Jump "B.Sub"
+Set $result to $Sub.result
+
+Set 2 to $Pow.params.base
+Set 3 to $Pow.params.pow
+Jump "B.Pow"
+
+Return
+

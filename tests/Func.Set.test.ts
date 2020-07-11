@@ -32,5 +32,7 @@ describe("Func.Set test", () => {
     } catch (e) {
       expect(e.message).to.equal("Cannot set value to value");
     }
+    setFunc1.parse("Set 3 to $x.y").execute(ctx);
+    expect(ctx.Context.x.children.y.value).to.equal(3);
   });
 });
