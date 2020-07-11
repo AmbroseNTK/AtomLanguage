@@ -1,9 +1,9 @@
 import { Variable } from "./Variable";
-import { Null } from "./Null";
-import { Boolean } from "./Boolean";
-import { Str } from "./Str";
-import { Num } from "./Num";
-import { Any } from "./Any";
+import { Null } from "./primities/Null";
+import { Boolean } from "./primities/Boolean";
+import { Str } from "./primities/Str";
+import { Num } from "./primities/Num";
+import { Any } from "./primities/Any";
 
 export class VariableFactory {
   private static variablePattern = /\$([a-zA-Z0-9.]*)/;
@@ -62,7 +62,7 @@ export class VariableFactory {
     if (typeof value == "boolean") {
       return new Boolean("", <boolean>value);
     }
-    if (typeof value == "undefined") {
+    if (typeof value == "undefined" || value == null) {
       return new Null();
     }
     return new Any("", value);

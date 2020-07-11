@@ -1,7 +1,7 @@
 import { Function } from "../Function";
 import { Variable } from "../Variable";
 import { Context } from "../Context";
-import { Num } from "../Num";
+import { Num } from "../primities/Num";
 import { VariableFactory } from "../VariableFactory";
 
 export class IntFunction extends Function {

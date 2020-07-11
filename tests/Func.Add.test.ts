@@ -1,8 +1,8 @@
 import { expect } from "chai";
 import "mocha";
 import { Context } from "../core/Context";
-import { Str } from "../core/Str";
-import { Num } from "../core/Num";
+import { Str } from "../core/primities/Str";
+import { Num } from "../core/primities/Num";
 import { AddFunction } from "../core/functions/Add";
 import { SetFunction } from "../core/functions/Set";
 

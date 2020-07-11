@@ -1,10 +1,10 @@
 import { Variable } from "./Variable";
-import { Null } from "./Null";
-import { Boolean } from "./Boolean";
-import { Str } from "./Str";
-import { Num } from "./Num";
+import { Null } from "./primities/Null";
+import { Boolean } from "./primities/Boolean";
+import { Str } from "./primities/Str";
+import { Num } from "./primities/Num";
 import { VariableFactory } from "./VariableFactory";
-import { Any } from "./Any";
+import { Any } from "./primities/Any";
 
 export class Context {
   constructor(private ctx: any) {}
