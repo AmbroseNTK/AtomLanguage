@@ -1,0 +1,20 @@
+{
+  "name": "atomlanguage",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "mocha -r ts-node/register tests/**/*.test.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/chai": "^4.2.11",
+    "@types/mocha": "^7.0.2",
+    "chai": "^4.2.0",
+    "mocha": "^8.0.1",
+    "ts-node": "^8.10.2"
+  },
+  "dependencies": {
+    "typescript": "^3.9.6"
+  }
+}
