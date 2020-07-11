@@ -1,0 +1,3 @@
+Begin
+Set "Hello" to $greeting
+Add " World" to $greeting

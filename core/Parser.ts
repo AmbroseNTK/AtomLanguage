@@ -29,19 +29,29 @@ export class Parser {
   ];
   public static parse(fileName: string, source: string): Array<FunctionLine> {
     let result = new Array<FunctionLine>();
-    let lines = source.trim().split("\n");
+    let lines = source.trim().split(/\r?\n/);
+    let matched = false;
     for (let i = 0; i < lines.length; i++) {
+      matched = false;
       for (let parser of this.parsers) {
         try {
-          let fn = parser.parse(lines[i]);
+          let fn = parser.parse(lines[i].trim());
           result.push(new FunctionLine(fileName, i + 1, fn));
+          matched = true;
           break;
         } catch (e) {
-          if (e instanceof FunctionNotMatchError) {
+          if (e.message.match(/(.*) is not match any pattern/)) {
             continue;
           }
           throw new ParseError(e, fileName, i + 1);
         }
+      }
+      if (!matched) {
+        throw new ParseError(
+          new Error("Syntax error: " + lines[i]),
+          fileName,
+          i + 1
+        );
       }
     }
     return result;

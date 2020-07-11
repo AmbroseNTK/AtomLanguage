@@ -5,8 +5,11 @@ import { Str } from "./primities/Str";
 import { Num } from "./primities/Num";
 import { VariableFactory } from "./VariableFactory";
 import { Any } from "./primities/Any";
+import { FunctionLine } from "./FunctionLine";
 
 export class Context {
+  public callStack: Array<FunctionLine> = [];
+
   constructor(private ctx: any) {}
 
   public get Context() {
